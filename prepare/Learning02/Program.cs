@@ -2,8 +2,13 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    public string _JobTitle ;
+    public string _companey;
+    public int _startyear;
+    public int _endyear;
+
+    public void Display()
     {
-        Console.WriteLine("Hello Learning02 World!");
+        Console.Write($"{_JobTitle}|{_companey}|{-_startyear}-{_endyear}");
     }
 }
