@@ -1,6 +1,6 @@
 using System;
 
-class Program
+public class JobsTitle
 {
     public string _JobTitle ;
     public string _companey;
