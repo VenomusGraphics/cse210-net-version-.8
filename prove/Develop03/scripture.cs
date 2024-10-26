@@ -4,7 +4,7 @@ public class Scripture
     private string reference;
     private string text;
 
-    // Constructor (optional, you can include logic here if needed)
+    
     public Scripture()
     {
     }
