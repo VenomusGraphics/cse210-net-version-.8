@@ -10,7 +10,7 @@ public class Journal
 
     public void DisplayAll()
     {
-        foreach (var entry in _entries)
+        foreach (string entry in _entries)
         {
             Console.WriteLine("Date: " + entry.Date);
             Console.WriteLine("Prompt: " + entry.PromptText);
@@ -25,7 +25,7 @@ public class Journal
     {
         using (StreamWriter writer = new StreamWriter(fileName))
         {
-            foreach (var entry in _entries)
+            foreach (string entry in _entries)
             {
                 writer.WriteLine("Date: " + entry.Date);
                 writer.WriteLine("Prompt: " + entry.PromptText);
