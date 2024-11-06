@@ -8,6 +8,8 @@ public class Entry
 
     public string _body;
 
+    
+
     // behaviors
     public string GetDateTime()
     {
@@ -39,4 +41,5 @@ public class Entry
     {
         Console.WriteLine($"{_prompt}: ");
     }
+
 }
