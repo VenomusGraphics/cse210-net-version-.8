@@ -12,7 +12,7 @@ class ListingActivity : Activity
 
     protected override void PerformActivity()
     {
-        Console.WriteLine("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
+        Console.WriteLine("This activity will help you reflect on the good things in your life.by having you list as many things as you can in a certain area.");
 
         Console.WriteLine(GetRandomPrompt());
         Thread.Sleep(5000); // Initial 5-second countdown.
@@ -28,7 +28,7 @@ class ListingActivity : Activity
         Console.WriteLine($"Number of items listed: {itemsListed}");
     }
 
-    private string GetRandomPrompt()
+    private string GetRandomPrompt()    
     {
         return listingPrompts[random.Next(listingPrompts.Count)];
     }
