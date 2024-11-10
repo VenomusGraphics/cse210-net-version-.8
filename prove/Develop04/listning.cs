@@ -19,7 +19,7 @@ class ListingActivity : Activity
         int itemsListed = 0;
         for (int i = 0; i < duration; i++)
         {
-            Console.WriteLine("Enter an item (or 'done' to finish listing):");
+            Console.WriteLine("Enter an item or enter ('done') to finish listing:");
             string item = Console.ReadLine();
             if (item.ToLower() == "done")
                 break;

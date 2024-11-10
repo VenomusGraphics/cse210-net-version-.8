@@ -13,6 +13,7 @@ class ReflectionActivity : Activity
             for (int j = 0; j < 10; j++)
             {
                 Console.Write("-"); // Display a countdown timer during each pause.
+                Console.Write("|");
                 Thread.Sleep(1000); // Show countdown for 1 second.
                 Console.Write("\b \b"); // Overwrite the countdown timer.
             }

@@ -6,7 +6,7 @@ class BreathingActivity : Activity
         for (int i = 0; i < duration; i++)
         {
             Console.WriteLine(i % 2 == 0 ? "Breathe in..." : "Breathe out...");
-            Thread.Sleep(1000); // Show countdown for 1 second.
+            Thread.Sleep(8000); 
         }
     }
 }
