@@ -32,12 +32,10 @@ public void RecordEvent(int goalIndex)
 
     public void SaveGoals(string filePath)
     {
-        using (StreamWriter writer = new StreamWriter(filePath))
+        using StreamWriter writer = new StreamWriter(filePath);
+        foreach (Goal goal in goals)
         {
-            foreach (Goal goal in goals)
-            {
-                writer.WriteLine(goal.GetStringRepresentation());
-            }
+            writer.WriteLine(goal.GetStringRepresentation());
         }
     }
 
