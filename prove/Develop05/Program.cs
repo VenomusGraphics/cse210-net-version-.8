@@ -54,7 +54,7 @@ public class Program
                     break;
 
                 case 2:
-                    Console.WriteLine("Enter the goal index to record an event for:");
+                    Console.WriteLine("Enter goal type (1: Simple, 2: Eternal, 3: Checklist):");
                     int goalIndex = int.Parse(Console.ReadLine());
                     goalManager.RecordEvent(goalIndex);
                     break;
