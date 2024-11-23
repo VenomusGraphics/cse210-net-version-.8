@@ -22,8 +22,8 @@ public class Program
             switch (choice)
             {
                 case 1:
-                        Console.WriteLine("Enter goal type (1: Simple, 2: Eternal, 3: Checklist):");
-                        int goalType = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter goal type (1: Simple, 2: Eternal, 3: Checklist):");
+                    int goalType = int.Parse(Console.ReadLine());
                     Console.WriteLine("Enter goal name:");
                     string goalName = Console.ReadLine();
 
@@ -43,7 +43,7 @@ public class Program
                     }
                     else if (goalType == 3)
                     {
-                        Console.WriteLine("Enter target count for the checklist:");
+                        Console.WriteLine("Enter goal type (1: Simple, 2: Eternal, 3: Checklist):");
                         int target = int.Parse(Console.ReadLine());
 
                         Console.WriteLine("Enter bonus points for completing the checklist:");
@@ -58,6 +58,7 @@ public class Program
                     int goalIndex = int.Parse(Console.ReadLine());
                     goalManager.RecordEvent(goalIndex);
                     break;
+
                 case 3:
                     goalManager.DisplayPlayerInfo();
                     break;
@@ -67,15 +68,11 @@ public class Program
                     break;
 
                 case 5:
-                    Console.WriteLine("Enter the file path to save goals:");
-                    string saveFilePath = Console.ReadLine();
-                    goalManager.SaveGoals(saveFilePath);
+                    goalManager.SaveGoals();
                     break;
 
                 case 6:
-                    Console.WriteLine("Enter the file path to load goals:");
-                    string loadFilePath = Console.ReadLine();
-                    goalManager.LoadGoals(loadFilePath);
+                    goalManager.LoadGoals();
                     break;
 
                 case 7:

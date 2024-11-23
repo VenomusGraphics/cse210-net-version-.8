@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
 public class GoalManager
 {
     private List<Goal> goals = new List<Goal>();
@@ -8,14 +12,19 @@ public class GoalManager
         goals.Add(goal);
     }
 
-public void RecordEvent(int goalIndex)
-{
-    if (goalIndex >= 0 && goalIndex < goals.Count)
+    public void RecordEvent(int goalIndex)
     {
-        int pointsEarned = goals[goalIndex].RecordEvent();
-        playerScore += pointsEarned;
+        if (goalIndex >= 0 && goalIndex < goals.Count)
+        {
+            int pointsEarned = goals[goalIndex].RecordEvent();
+            playerScore += pointsEarned;
+        }
+        else
+        {
+            Console.WriteLine("Invalid goal index. Please select a valid index.");
+        }
     }
-}
+
     public void DisplayPlayerInfo()
     {
         Console.WriteLine($"Your Score: {playerScore}");
@@ -30,70 +39,87 @@ public void RecordEvent(int goalIndex)
         }
     }
 
-    public void SaveGoals(string filePath)
+    public void SaveGoals()
     {
-        using StreamWriter writer = new StreamWriter(filePath);
-        foreach (Goal goal in goals)
+        string filePath = AppDomain.CurrentDomain.BaseDirectory + "Goals.txt";
+        try
         {
-            writer.WriteLine(goal.GetStringRepresentation());
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (Goal goal in goals)
+                {
+                    writer.WriteLine(goal.GetStringRepresentation());
+                }
+            }
+            Console.WriteLine("Goals saved successfully to " + filePath);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error saving goals: " + e.Message);
         }
     }
 
-    public void LoadGoals(string filePath)
-{
-    goals.Clear(); // Clear existing goals
-    playerScore = 0; // Reset player score
-
-    if (File.Exists(filePath))
+    public void LoadGoals()
     {
-        try
+        string filePath = AppDomain.CurrentDomain.BaseDirectory + "Goals.txt";
+        goals.Clear(); // Clear existing goals
+        playerScore = 0; // Reset player score
+
+        if (File.Exists(filePath))
         {
-            using (StreamReader reader = new StreamReader(filePath))
+            try
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                using (StreamReader reader = new StreamReader(filePath))
                 {
-                    string[] parts = line.Split(',');
-                    if (parts.Length >= 4)
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        string name = parts[0];
-                        string description = parts[1];
-                        int points = int.Parse(parts[2]);
-                        int isComplete = int.Parse(parts[3]);
-
-                        if (parts.Length == 7)
+                        string[] parts = line.Split(',');
+                        if (parts.Length >= 4)
                         {
-                            int completedCount = int.Parse(parts[4]);
-                            int target = int.Parse(parts[5]);
-                            int bonus = int.Parse(parts[6]);
+                            string name = parts[0];
+                            string description = parts[1];
+                            int points = int.Parse(parts[2]);
+                            int isComplete = int.Parse(parts[3]);
 
-                            ChecklistGoal checklistGoal = new ChecklistGoal(name, description, points, target, bonus);
-                            checklistGoal.SetCompletedCount(completedCount);
-                            if (isComplete == 1)
+                            if (parts.Length == 7)
                             {
-                                checklistGoal.RecordEvent(); // Mark as complete
+                                int completedCount = int.Parse(parts[4]);
+                                int target = int.Parse(parts[5]);
+                                int bonus = int.Parse(parts[6]);
+
+                                ChecklistGoal checklistGoal = new ChecklistGoal(name, description, points, target, bonus);
+                                checklistGoal.SetCompletedCount(completedCount);
+                                if (isComplete == 1)
+                                {
+                                    checklistGoal.RecordEvent(); // Mark as complete
+                                }
+                                goals.Add(checklistGoal);
                             }
-                            goals.Add(checklistGoal);
-                        }
-                        else if (isComplete == 1)
-                        {
-                            SimpleGoal simpleGoal = new SimpleGoal(name, description, points);
-                            simpleGoal.RecordEvent(); // Mark as complete
-                            goals.Add(simpleGoal);
-                        }
-                        else
-                        {
-                            EternalGoal eternalGoal = new EternalGoal(name, description, points);
-                            goals.Add(eternalGoal);
+                            else if (isComplete == 1)
+                            {
+                                SimpleGoal simpleGoal = new SimpleGoal(name, description, points);
+                                simpleGoal.RecordEvent(); // Mark as complete
+                                goals.Add(simpleGoal);
+                            }
+                            else
+                            {
+                                EternalGoal eternalGoal = new EternalGoal(name, description, points);
+                                goals.Add(eternalGoal);
+                            }
                         }
                     }
                 }
+                Console.WriteLine("Goals loaded successfully from " + filePath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error loading goals: " + e.Message);
             }
         }
-        catch (Exception ex)
+        else
         {
-            Console.WriteLine("Error loading goals: " + ex.Message);
+            Console.WriteLine("Error: The specified file does not exist.");
         }
     }
-}
 }
