@@ -24,7 +24,7 @@ class Scripture
         for (int i = 0; i < numberOfWordsToHide; i++)
         {
             int indexToHide = random.Next(0, words.Length);
-            words[indexToHide] = "_____"; // Replace with asterisks to hide the word
+            words[indexToHide] = "_____"; // Replace with underscores to hide the word
         }
 
         return string.Join(" ", words);
